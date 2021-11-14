@@ -226,6 +226,8 @@ int main() {
 
 /*
 	Rezultat naloge:
+	
+	Hitrost:
 
 	ŠTEVILO		STATIČNO	STATIČNO	DINAMIČNO	DINAMIČNO	DINAMIČNO
 	NITI		ENAKOMERNO	KROŽNO (Np=1)	(Np=10)		(Np=100)	(Np=1000)
