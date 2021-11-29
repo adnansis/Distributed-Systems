@@ -225,7 +225,6 @@ int main() {
 }
 
 /*
-	Rezultat naloge:
 	
 	Hitrost:
 
