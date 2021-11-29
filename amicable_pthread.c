@@ -1,7 +1,7 @@
 // Prevajanje programa: 
-//				gcc -O2 -lm -lpthread -fopenmp -w -o amicable amicable.c
+//				gcc -O2 -lm -lpthread -fopenmp -w -o amicable_pthread amicable_pthread.c
 // Zagon programa: 
-//				srun -n1 --reservation=fri --cpus-per-task=32 ./amicable
+//				srun -n1 --reservation=fri --cpus-per-task=32 ./amicable_pthread
 
 #include <stdio.h>
 #include <unistd.h>
