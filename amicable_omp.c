@@ -46,7 +46,7 @@ void vsota_staticno_enakomerno() {
 
 void vsota_staticno_krozno() {
 
-    #pragma omp parallel for schedule(static, 1)
+    #pragma omp parallel for schedule(static, PACK_SIZE)
 	for(int i = 0; i < N; i++) {
 
 		int sum = 1;
@@ -146,7 +146,7 @@ int main() {
 
 	end = omp_get_wtime(); 
 
-	printf("Staticno krozno:      %f s\n", end - start);
+	printf("Staticno krozno (Np=%d):      %f s\n", PACK_SIZE, end - start);
 
 	// vsota_dinamicno
 
@@ -170,37 +170,37 @@ int main() {
 /*
 	Rezultat naloge:
 
-	ŠTEVILO		STATIČNO		STATIČNO		DINAMIČNO		DINAMIČNO		DINAMIČNO
-	NITI		ENAKOMERNO		KROŽNO (Np=1)	(Np=10)			(Np=100)		(Np=1000)
+	ŠTEVILO		STATIČNO		STATIČNO		STATIČNO			DINAMIČNO		DINAMIČNO		DINAMIČNO
+	NITI		ENAKOMERNO		KROŽNO (Np=1)	KROŽNO (Np=1000)	(Np=10)			(Np=100)		(Np=1000)
 
-	1			195.657474 s	198.337574 s	198.321990 s	198.395531 s	198.326799 s
+	1			195.657474 s	198.337574 s	195.526645 s		198.321990 s	198.395531 s	198.326799 s
 
-	2			127.962643 s	 99.671310 s	 99.453069 s	 99.445326 s	 99.470047 s
+	2			127.962643 s	 99.671310 s	 97.969388 s 		 99.453069 s	 99.445326 s	 99.470047 s
 
-	4		 	 69.997175 s	 50.587002 s	 49.932803 s	 49.887579 s	 49.923096 s
+	4		 	 69.997175 s	 50.587002 s	 49.142510 s		 49.932803 s	 49.887579 s	 49.923096 s
 
-	8		 	 36.770868 s	 34.163064 s	 25.507659 s	 24.945291 s	 24.984201 s
+	8		 	 36.770868 s	 34.163064 s	 24.633058 s		 25.507659 s	 24.945291 s	 24.984201 s
 
-	16		 	 18.739677 s	 12.653842 s	 12.569809 s	 12.555798 s	 12.540080 s
+	16		 	 18.739677 s	 12.653842 s	 12.358463 s		 12.569809 s	 12.555798 s	 12.540080 s
 
-	32		 	 12.751069 s	 11.764138 s	  6.834785 s	  7.152081 s	  7.197113 s
-
-
+	32		 	 12.751069 s	 11.764138 s	  7.472528 s		  6.834785 s	  7.152081 s	  7.197113 s
 
 
-	ŠTEVILO		STATIČNO	STATIČNO		DINAMIČNO	DINAMIČNO	DINAMIČNO
-	NITI		ENAKOMERNO	KROŽNO (Np=1)	(Np=10)		(Np=100)	(Np=1000)
 
-	1		  	  1.00		  1.00		  	1.00		  1.00		  1.00
 
-	2		  	  1.53		  1.98		  	1.99		  1.99		  2.02
+	ŠTEVILO		STATIČNO	STATIČNO		STATIČNO			DINAMIČNO	DINAMIČNO	DINAMIČNO
+	NITI		ENAKOMERNO	KROŽNO (Np=1)	KROŽNO (Np=1000)	(Np=10)		(Np=100)	(Np=1000)
 
-	4		  	  2.79		  3.92		  	4.01		  3.97		  3.97
+	1		  	  1.00		  1.00		  	1.00				1.00		  1.00		  1.00
 
-	8		  	  5.30		  5.80		  	7.77		  7.95		  7.94
+	2		  	  1.53		  1.98		  	2.00				1.99		  1.99		  2.02
 
-	16		 	  10.44		 15.68		 	15.77		 15.80		 15.81
+	4		  	  2.79		  3.92		  	3.98				4.01		  3.97		  3.97
 
-	32		 	  15.34		 16.99		 	29.04		 27.75		 27.58
+	8		  	  5.30		  5.80		  	7.94				7.77		  7.95		  7.94
+
+	16		 	  10.44		 15.68		   15.82			   15.77		 15.80		 15.81
+
+	32		 	  15.34		 16.99		   26.18			   29.04		 27.75		 27.58
 
 */
